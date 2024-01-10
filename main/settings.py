@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'django_seed',
     'apps.common',
     'apps.user',
+    'apps.airline',
 ]
 
 MIDDLEWARE = [

@@ -1,6 +1,16 @@
 from django.shortcuts import get_object_or_404
 
 
+def get_object_or_notfound(model, **filter_kwargs):
+    filter_kwargs['deleted_at__isnull'] = True
+    return get_object_or_404(model, **filter_kwargs)
+
+
+def count_instances(model, **filter_kwargs):
+    count = model.objects.filter(**filter_kwargs, deleted_at__isnull=False).count()
+    return count
+
+
 def get_or_create_instance(model, create_kwargs=None, **filter_kwargs):
     if create_kwargs:
         # Create and return an instance if create_kwargs are provided
@@ -14,9 +24,14 @@ def get_or_create_instance(model, create_kwargs=None, **filter_kwargs):
     return instance
 
 
-def get_object_or_notfound(model, **filter_kwargs):
-    filter_kwargs['deleted_at__isnull'] = True
-    return get_object_or_404(model, **filter_kwargs)
+def create_instance(model, create_kwargs=None):
+    if create_kwargs:
+        # Create and return an instance with the provided create_kwargs
+        instance = model.objects.create(**create_kwargs)
+    else:
+        instance = None
+
+    return instance
 
 
 def filter_instance(model, ordering=None, **filter_kwargs):
@@ -44,8 +59,3 @@ def delete_instance(model, instance_id):
         return True
     except model.DoesNotExist:
         return False
-
-
-def count_instances(model, **filter_kwargs):
-    count = model.objects.filter(**filter_kwargs, deleted_at__isnull=False).count()
-    return count

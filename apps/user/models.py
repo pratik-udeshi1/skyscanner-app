@@ -28,7 +28,7 @@ class Role(BaseModel):
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return "{}-{}".format(self.id, self.name)
+        return "{}".format(self.name)
 
     class Meta:
         verbose_name = "Role"

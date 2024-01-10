@@ -25,7 +25,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         filter_kwargs = {'name': 'staff'}  # Assigning Default Role as "Staff" for every new registration.
-        validated_data['role'] = get_or_create_instance(Role, create_kwargs={}, **filter_kwargs)
+        validated_data['role'] = get_or_create_instance(Role, create_kwargs=filter_kwargs, **filter_kwargs)
         user = User.objects.create_user(**validated_data)
         return user
 
