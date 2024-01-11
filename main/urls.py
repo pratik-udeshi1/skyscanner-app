@@ -3,7 +3,10 @@ from django.urls import include
 from django.urls import path
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
+from graphene_django.views import GraphQLView
 from rest_framework import permissions
+
+from apps.flight.schema import schema
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -12,6 +15,8 @@ urlpatterns = [
     path('api/v1/airport/', include('apps.airport.urls')),
     path('api/v1/flight/', include('apps.flight.urls')),
     path('api/v1/booking/', include('apps.booking.urls')),
+    path('api/v1/graphql/', GraphQLView.as_view(graphiql=True, schema=schema), name='graphql'),
+
 ]
 
 schema_view = get_schema_view(

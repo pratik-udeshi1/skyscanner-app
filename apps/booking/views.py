@@ -17,7 +17,7 @@ class BookingListView(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated, permissions.IsStaff]
     pagination_class = pagination.DefaultPagination
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
-    search_fields = ['flight', 'user__name']
+    search_fields = ['flight', 'user__full_name']
     ordering = ['-created_at']
 
     def get_queryset(self):
