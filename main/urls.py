@@ -11,6 +11,7 @@ urlpatterns = [
     path('api/v1/airline/', include('apps.airline.urls')),
     path('api/v1/airport/', include('apps.airport.urls')),
     path('api/v1/flight/', include('apps.flight.urls')),
+    path('api/v1/booking/', include('apps.booking.urls')),
 ]
 
 schema_view = get_schema_view(
