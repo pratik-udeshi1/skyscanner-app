@@ -25,11 +25,11 @@ class AirportListView(generics.ListCreateAPIView):
 
     def get(self, request, *args, **kwargs):
         filtered_qs = self.filter_queryset(self.get_queryset())
-        serializer = self.serializer_class(self.paginate_queryset(filtered_qs), many=True, context={'is_get': True})
+        serializer = self.serializer_class(self.paginate_queryset(filtered_qs), many=True, context={'name_upper': True})
         return Response(data=self.get_paginated_response(serializer.data).data, status=status.HTTP_200_OK)
 
     def post(self, request, *args, **kwargs):
-        serializer = self.serializer_class(data=request.data, context={'is_post': True})
+        serializer = self.serializer_class(data=request.data, context={'name_upper': True})
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
