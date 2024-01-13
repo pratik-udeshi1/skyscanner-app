@@ -20,6 +20,7 @@ Follow these steps to set up and run the project locally.
 - Python 3.x
 - Django (DRF)
 - PostgreSQL (or other database of your choice)
+- GraphQL
 - Swagger (API Documentation)
 
 ### Installation
